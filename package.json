@@ -1,6 +1,6 @@
 {
   "name": "longform-memory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Constant-size memory for long-form AI writing. Chapter 1000 gets the same token budget as chapter 10. Zero dependencies, runs anywhere JS runs.",
   "keywords": [
     "llm",
