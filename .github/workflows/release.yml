@@ -46,7 +46,12 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 22.14.0
+          # 🚨 别把 Node 钉死在「OIDC 的最低要求」上。
+          # 原来写的是 22.14.0（OIDC 要求 ≥22.14.0），而下面装的是 npm@latest ——
+          # 一个钉死、一个浮动，迟早撞：2026-08-15 npm 涨到 12.0.2，
+          # 它要求 Node ^22.22.2 || ^24.15.0，于是发版当场 EBADENGINE 红在起跑线上。
+          # lts/* 跟着当前 LTS 走，npm@latest 一向支持当前 LTS。
+          node-version: lts/*
           registry-url: 'https://registry.npmjs.org'
           # 发布构建不吃缓存：缓存命中会让「装的到底是什么」变得不确定
           package-manager-cache: false
