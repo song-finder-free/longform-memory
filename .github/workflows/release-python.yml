@@ -86,7 +86,10 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
-    environment: pypi
+    # 刻意不声明 `environment:` —— PyPI 上这个 publisher 配的是
+    # "Environment name: (Any)"，声明一个仓库里并不存在的 environment
+    # 只是多一个首发失败点。以后要加保护规则（人工审批之类）时，
+    # 先在仓库里建好 environment，再回 PyPI 把名字填成同一个。
     permissions:
       id-token: write # ← OIDC 的命门，缺了就换不到凭据
     steps:
