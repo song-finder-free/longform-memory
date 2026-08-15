@@ -90,6 +90,8 @@ npm install longform-memory     # pnpm add · bun add · yarn add
 
 Zero dependencies. Pure functions. Node 18+, Bun, Deno, browsers, Cloudflare Workers.
 
+> **ESM only.** Use `import`. `require()` throws `ERR_REQUIRE_ESM` on Node 18 and 20; it works on Node 22.12+ / 24, which support requiring ES modules.
+
 ## Quick start
 
 ```ts
