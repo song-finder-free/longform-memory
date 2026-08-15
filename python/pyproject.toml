@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "longform-memory"
+version = "0.1.0"
+description = "Constant token budget for long-form LLM writing. Chapter 1000 costs the same as chapter 10. Zero dependencies."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "song-finder-free" }]
+keywords = [
+    "llm",
+    "long-context",
+    "context-window",
+    "token-budget",
+    "rag",
+    "memory",
+    "ai-writing",
+    "continuity",
+    "vector-search",
+    "sqlite",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Linguistic",
+    "Typing :: Typed",
+]
+# 零运行时依赖是卖点之一，别往这里加东西
+dependencies = []
+
+# 🚨 这四条就是 PyPI 详情页上的链接，也是本包在整条外链链路里的落点。
+# 实测 PyPI 详情页把 Homepage 裸链出去（follow 52 / nofollow 2），
+# 填成 GitHub 就是把权重喂给 GitHub —— 见 docs/OSS_BACKLINK_PLAN.md。
+[project.urls]
+Homepage = "https://emberspun.com/open-source/longform-memory"
+Documentation = "https://emberspun.com/open-source/longform-memory"
+Source = "https://github.com/song-finder-free/longform-memory"
+Issues = "https://github.com/song-finder-free/longform-memory/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/longform_memory"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

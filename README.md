@@ -86,11 +86,14 @@ Both open long-form generators we studied before writing this ship without a glo
 
 ```bash
 npm install longform-memory     # pnpm add · bun add · yarn add
+pip install longform-memory     # same behaviour, same wire format
 ```
 
-Zero dependencies. Pure functions. Node 18+, Bun, Deno, browsers, Cloudflare Workers.
+Zero dependencies. Pure functions. Node 18+, Bun, Deno, browsers, Cloudflare Workers — and Python 3.9+ (`python/`, standard library only).
 
 > **ESM only.** Use `import`. `require()` throws `ERR_REQUIRE_ESM` on Node 18 and 20; it works on Node 22.12+ / 24, which support requiring ES modules.
+
+**The two packages are byte-compatible.** Vectors are little-endian float32, normalised at write time, base64 encoded — write them from a Node ingest job and read them from a Python worker, or the reverse. That contract is pinned by fixtures generated from the TypeScript side and by a CI job that makes both implementations answer the same inputs and compares byte for byte. Each suite alone only proves *self*-consistency; that job is the one that catches "both sides self-consistent, mutually unreadable".
 
 ## Quick start
 
