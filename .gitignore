@@ -7,6 +7,11 @@ coverage/
 .env.*
 !.env.example
 
+# npm 凭据。`npm config set //registry.npmjs.org/:_authToken` 若在项目目录下执行
+# 就会写在这里 —— 不挡住的话，一次 `git add -A` 就把发布 token 提交上去了。
+.npmrc
+
+
 # Logs
 *.log
 npm-debug.log*
