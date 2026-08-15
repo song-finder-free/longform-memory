@@ -1,0 +1,79 @@
+# Publish to npm via Trusted Publishing (OIDC) — no token, no secret, no 2FA prompt.
+#
+# 为什么不是 NPM_TOKEN：
+#   - classic automation token 已于 2025-11-19 全部吊销
+#   - bypass-2FA granular token 90 天就过期，且 2027-01 起失去直接发布权
+#   - OIDC 换的是短期凭据，**仓库里一个密钥都不存**，还自动带 provenance
+#
+# 一次性设置（在 npmjs.com 上做，不在这里）：
+#   包页面 → Settings → Trusted Publishers → Add
+#     Organization or user : song-finder-free
+#     Repository           : longform-memory
+#     Workflow filename    : release.yml     ← 必须与本文件名一字不差
+#     Allowed actions      : npm publish
+#
+# 之后发布只需要打个 tag：
+#   npm version patch   # 或 minor / major，它会自己改 package.json 并打 tag
+#   git push --follow-tags
+#
+# 🚨 硬要求，改这个文件前先读：
+#   - `id-token: write` 少了这一行，OIDC 换不到凭据，直接 403
+#   - npm CLI 必须 ≥ 11.5.1、Node 必须 ≥ 22.14.0，低了不支持 OIDC
+#   - workflow 文件名改了必须回 npmjs.com 同步改，否则信任关系对不上
+#   - tag 上的版本号必须与 package.json 一致，否则发出去的是另一个版本
+
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  # 手动兜底：tag 打错时不用重新打 tag
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # ← OIDC 的命门，缺了就是 403
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.14.0
+          registry-url: 'https://registry.npmjs.org'
+          # 发布构建不吃缓存：缓存命中会让「装的到底是什么」变得不确定
+          package-manager-cache: false
+
+      # 系统自带的 npm 可能低于 11.5.1，OIDC 会静默走不通
+      - name: Ensure npm supports trusted publishing
+        run: |
+          npm install -g npm@latest
+          npm --version
+
+      - run: pnpm install --frozen-lockfile
+
+      # 门禁在发布之前，不在之后 —— 发出去的版本撤不回来
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
+      # tag 与 package.json 必须说同一个版本号。
+      # 不校验的话，打错 tag 会把旧版本重新发一遍或发出意外版本。
+      - name: Tag must match package.json version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          PKG=$(node -p "require('./package.json').version")
+          TAG=${GITHUB_REF_NAME#v}
+          echo "package.json=$PKG  tag=$TAG"
+          [ "$PKG" = "$TAG" ] || { echo "::error::tag v$TAG 与 package.json $PKG 不一致"; exit 1; }
+
+      # 不传 --otp、不设 NODE_AUTH_TOKEN：凭据由 OIDC 现换
+      - name: Publish
+        run: npm publish --access public
