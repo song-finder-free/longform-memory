@@ -6,7 +6,7 @@
 
 **Chapter 1000 gets the same token budget as chapter 10.**
 
-[![CI](https://github.com/song-finder-free/longform-memory/actions/workflows/ci.yml/badge.svg)](https://github.com/song-finder-free/longform-memory/actions/workflows/ci.yml)
+[![CI](https://github.com/emberspun/longform-memory/actions/workflows/ci.yml/badge.svg)](https://github.com/emberspun/longform-memory/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/longform-memory?logo=npm&color=cb3837)](https://www.npmjs.com/package/longform-memory)
 [![downloads](https://img.shields.io/npm/dm/longform-memory?color=cb3837)](https://www.npmjs.com/package/longform-memory)
 [![minzipped](https://img.shields.io/bundlephobia/minzip/longform-memory)](https://bundlephobia.com/package/longform-memory)
@@ -89,7 +89,7 @@ npm install longform-memory     # pnpm add · bun add · yarn add
 pip install longform-memory     # same behaviour, same wire format
 ```
 
-Zero dependencies. Pure functions. Node 18+, Bun, Deno, browsers, Cloudflare Workers — and Python 3.9+ (`python/`, standard library only).
+Zero dependencies. Pure functions. Node 18+, Bun, Deno, browsers, Cloudflare Workers — and Python 3.9+ ([separate repo](https://github.com/emberspun/longform-memory-python), standard library only).
 
 > **ESM only.** Use `import`. `require()` throws `ERR_REQUIRE_ESM` on Node 18 and 20; it works on Node 22.12+ / 24, which support requiring ES modules.
 
@@ -227,6 +227,6 @@ The budget-overrun test sweeps every item size from 1 to 200 tokens rather than 
 
 ## License
 
-MIT © [song-finder-free](https://github.com/song-finder-free)
+MIT © [Emberspun](https://github.com/emberspun)
 
 Extracted from **[Emberspun](https://emberspun.com)**, an AI writing platform for book authors, where it runs in production on every chapter.

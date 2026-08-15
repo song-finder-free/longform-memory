@@ -7,7 +7,7 @@
 #
 # 一次性设置（在 npmjs.com 上做，不在这里）：
 #   包页面 → Settings → Trusted Publishers → Add
-#     Organization or user : song-finder-free
+#     Organization or user : emberspun
 #     Repository           : longform-memory
 #     Workflow filename    : release.yml     ← 必须与本文件名一字不差
 #     Allowed actions      : npm publish

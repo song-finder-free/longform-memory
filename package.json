@@ -18,13 +18,13 @@
   "homepage": "https://emberspun.com/open-source/longform-memory",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/song-finder-free/longform-memory.git"
+    "url": "git+https://github.com/emberspun/longform-memory.git"
   },
   "bugs": {
-    "url": "https://github.com/song-finder-free/longform-memory/issues"
+    "url": "https://github.com/emberspun/longform-memory/issues"
   },
   "license": "MIT",
-  "author": "song-finder-free",
+  "author": "Emberspun",
   "type": "module",
   "sideEffects": false,
   "exports": {

@@ -4,7 +4,7 @@
  * Chapter 1000 gets the same token budget as chapter 10.
  * Zero dependencies; runs on Node, Bun, Deno, browsers and Cloudflare Workers.
  *
- * @see https://github.com/song-finder-free/longform-memory
+ * @see https://github.com/emberspun/longform-memory
  */
 
 export {
