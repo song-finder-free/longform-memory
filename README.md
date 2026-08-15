@@ -229,4 +229,4 @@ The budget-overrun test sweeps every item size from 1 to 200 tokens rather than 
 
 MIT © [Emberspun](https://github.com/emberspun)
 
-Extracted from **[Emberspun](https://emberspun.com)**, an AI writing platform for book authors, where it runs in production on every chapter.
+Extracted from **[Emberspun, an AI book writer agent for self-publishers](https://emberspun.com)**, where it runs in production on every chapter.
