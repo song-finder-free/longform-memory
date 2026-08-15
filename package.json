@@ -1,0 +1,57 @@
+{
+  "name": "longform-memory",
+  "version": "0.1.0",
+  "description": "Constant-size memory for long-form AI writing. Chapter 1000 gets the same token budget as chapter 10. Zero dependencies, runs anywhere JS runs.",
+  "keywords": [
+    "llm",
+    "long-context",
+    "context-window",
+    "token-budget",
+    "rag",
+    "memory",
+    "ai-writing",
+    "continuity",
+    "vector-search",
+    "cloudflare-workers",
+    "mcp"
+  ],
+  "homepage": "https://emberspun.com/open-source/longform-memory",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/song-finder-free/longform-memory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/song-finder-free/longform-memory/issues"
+  },
+  "license": "MIT",
+  "author": "song-finder-free",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
